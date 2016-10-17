@@ -22,6 +22,7 @@ func NewShowConsumers() ShowConsumers {
 	sc.Arg2 = cli.ALL_CONSUMERS_ARG
 
 	sc.Flagset.Usage = func() {
+		fmt.Println("Show all consumers:")
 		fmt.Println("show consumers")
 		sc.Flagset.PrintDefaults()
 	}

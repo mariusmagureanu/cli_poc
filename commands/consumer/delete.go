@@ -26,6 +26,7 @@ func NewDeleteConsumer() DeleteConsumer {
 	dc.Arg2 = cli.ONE_CONSUMER_ARG
 
 	dc.Flagset.Usage = func() {
+		fmt.Println("Delete and existing consumer:")
 		fmt.Println("delete consumer [options]")
 		dc.Flagset.PrintDefaults()
 	}

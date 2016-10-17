@@ -28,7 +28,8 @@ func NewRemoveEndpointModule() RemoveEndpointModule {
 	sc.Arg2 = cli.ONE_MODULE_ARG
 
 	sc.Flagset.Usage = func() {
-		fmt.Println("delete module [name] endpoint [endpoint]")
+		fmt.Println("Remove a module from a specific endpoint:")
+		fmt.Println("delete module [name] [endpoint]")
 		sc.Flagset.PrintDefaults()
 	}
 	return sc

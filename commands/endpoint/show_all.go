@@ -22,6 +22,7 @@ func NewShowEndpoints() ShowEndpoints {
 	sc.Arg2 = cli.ALL_ENDPOINTS_ARG
 
 	sc.Flagset.Usage = func() {
+		fmt.Println("Show all endpoints:")
 		fmt.Println("show endpoints")
 	}
 

@@ -31,7 +31,8 @@ func NewAddEndpointModule() AddEndpointModule {
 	sc.Arg2 = cli.ONE_MODULE_ARG
 
 	sc.Flagset.Usage = func() {
-		fmt.Println("add module [name] endpoint [endpoint]")
+		fmt.Println("Assign a module to a specific endpoint:")
+		fmt.Println("add module [name] [endpoint]")
 		sc.Flagset.PrintDefaults()
 	}
 

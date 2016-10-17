@@ -26,6 +26,7 @@ func NewDeleteEndpoint() DeleteEndpoint {
 	dc.Arg2 = cli.ONE_ENDPOINT_ARG
 
 	dc.Flagset.Usage = func() {
+		fmt.Println("Delete an existing endpoint:")
 		fmt.Println("delete endpoint [options]")
 		dc.Flagset.PrintDefaults()
 	}

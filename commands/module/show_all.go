@@ -29,6 +29,7 @@ func NewShowEndpointModuless() ShowEndpointModules {
 	sc.Arg2 = cli.ALL_MODULE_ARG
 
 	sc.Flagset.Usage = func() {
+		fmt.Println("Show all modules for a specific endpoint:")
 		fmt.Println("show modules [endpoint]")
 		sc.Flagset.PrintDefaults()
 	}

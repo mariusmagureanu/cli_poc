@@ -30,6 +30,7 @@ func NewShowOneConsumer() ShowOneConsumer {
 	dc.Arg2 = cli.ONE_CONSUMER_ARG
 
 	dc.Flagset.Usage = func() {
+		fmt.Println("Show a specific consumer:")
 		fmt.Println("show consumer [options]")
 		dc.Flagset.PrintDefaults()
 	}

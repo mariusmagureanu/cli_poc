@@ -31,6 +31,7 @@ func NewShowOneEndpoint() ShowOneEndpoint {
 	dc.Arg2 = cli.ONE_ENDPOINT_ARG
 
 	dc.Flagset.Usage = func() {
+		fmt.Println("Show a specific endpoint:")
 		fmt.Println("show endpoint [options]")
 		dc.Flagset.PrintDefaults()
 	}

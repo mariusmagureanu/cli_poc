@@ -33,6 +33,7 @@ func NewCreateEndpoint() CreateEndpoint {
 	cc.path = cc.Flagset.String("path", "", "Endpoint path. (Required)")
 
 	cc.Flagset.Usage = func() {
+		fmt.Println("Create a new endpoint:")
 		fmt.Println("create endpoint [options]")
 		cc.Flagset.PrintDefaults()
 	}

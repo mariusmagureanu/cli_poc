@@ -31,6 +31,7 @@ func NewCreateConsumer() CreateConsumer {
 	cc.email = cc.Flagset.String("email", "", "Consumer email.")
 
 	cc.Flagset.Usage = func() {
+		fmt.Println("Createa a new consumer:")
 		fmt.Println("create consumer [options]")
 		cc.Flagset.PrintDefaults()
 	}
