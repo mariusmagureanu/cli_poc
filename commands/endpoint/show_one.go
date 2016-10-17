@@ -24,11 +24,17 @@ func NewShowOneEndpoint() ShowOneEndpoint {
 
 	dc.endpoint = make(map[string]interface{})
 
-	dc.Flagset = flag.NewFlagSet("endpoint", flag.ContinueOnError)
+	dc.Flagset = flag.NewFlagSet("show endpoint", flag.ContinueOnError)
 	dc.name = dc.Flagset.String("name", "", "Endpoint name. (Required)")
 
 	dc.Arg1 = cli.SHOW_COMMAND
 	dc.Arg2 = cli.ONE_ENDPOINT_ARG
+
+	dc.Flagset.Usage = func() {
+		fmt.Println("show endpoint [options]")
+		dc.Flagset.PrintDefaults()
+	}
+
 	return dc
 }
 

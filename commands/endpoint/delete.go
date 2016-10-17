@@ -19,11 +19,17 @@ type DeleteEndpoint struct {
 func NewDeleteEndpoint() DeleteEndpoint {
 	var dc = DeleteEndpoint{}
 
-	dc.Flagset = flag.NewFlagSet("endpoints", flag.ContinueOnError)
+	dc.Flagset = flag.NewFlagSet("delete endpoint", flag.ExitOnError)
 	dc.name = dc.Flagset.String("name", "", "Endpoint name. (Required)")
 
 	dc.Arg1 = cli.DELETE_COMMAND
 	dc.Arg2 = cli.ONE_ENDPOINT_ARG
+
+	dc.Flagset.Usage = func() {
+		fmt.Println("delete endpoint [options]")
+		dc.Flagset.PrintDefaults()
+	}
+
 	return dc
 }
 

@@ -17,9 +17,13 @@ type ShowEndpoints struct {
 func NewShowEndpoints() ShowEndpoints {
 	var sc = ShowEndpoints{}
 
-	sc.Flagset = flag.NewFlagSet("endpoints", flag.ContinueOnError)
+	sc.Flagset = flag.NewFlagSet("show endpoints", flag.ContinueOnError)
 	sc.Arg1 = cli.SHOW_COMMAND
 	sc.Arg2 = cli.ALL_ENDPOINTS_ARG
+
+	sc.Flagset.Usage = func() {
+		fmt.Println("show endpoints")
+	}
 
 	return sc
 }

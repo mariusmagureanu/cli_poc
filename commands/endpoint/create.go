@@ -27,10 +27,16 @@ func NewCreateEndpoint() CreateEndpoint {
 	cc.Arg1 = cli.CREATE_COMMAND
 	cc.Arg2 = cli.ONE_ENDPOINT_ARG
 
-	cc.Flagset = flag.NewFlagSet("endpoint", flag.ContinueOnError)
+	cc.Flagset = flag.NewFlagSet("create endpoint", flag.ExitOnError)
 	cc.name = cc.Flagset.String("name", "", "Endpoint name. (Required)")
 	cc.host = cc.Flagset.String("host", "", "Endpoint host. (Required)")
 	cc.path = cc.Flagset.String("path", "", "Endpoint path. (Required)")
+
+	cc.Flagset.Usage = func() {
+		fmt.Println("create endpoint [options]")
+		cc.Flagset.PrintDefaults()
+	}
+
 	return cc
 
 }
