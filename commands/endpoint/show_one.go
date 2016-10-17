@@ -7,20 +7,22 @@ import (
 	"net/http"
 	"os"
 
+	"encoding/json"
 	cli "github.com/mariusmagureanu/cli_poc/commands"
+	"strings"
 )
 
 type ShowOneEndpoint struct {
 	cli.Command
 	name *string
 
-	endpoint cli.SimpleEndpoint
+	endpoint map[string]interface{}
 }
 
 func NewShowOneEndpoint() ShowOneEndpoint {
 	var dc = ShowOneEndpoint{}
 
-	dc.endpoint = cli.SimpleEndpoint{}
+	dc.endpoint = make(map[string]interface{})
 
 	dc.Flagset = flag.NewFlagSet("endpoint", flag.ContinueOnError)
 	dc.name = dc.Flagset.String("name", "", "Endpoint name. (Required)")
@@ -44,7 +46,7 @@ func (c ShowOneEndpoint) GetArg2() string {
 
 func (c ShowOneEndpoint) Validate() error {
 	if err := c.Flagset.Parse(os.Args[3:]); err == nil {
-		if *c.name == "" {
+		if strings.TrimSpace(*c.name) == "" {
 			return errors.New("Invalid endpoint name.")
 		}
 	}
@@ -64,7 +66,8 @@ func (c ShowOneEndpoint) Output(status int) {
 
 	switch status {
 	case http.StatusOK:
-		fmt.Fprintln(cli.Writer, c.endpoint.ToString())
+		out, _ := json.MarshalIndent(c.endpoint, "", "  ")
+		fmt.Println(string(out))
 	case http.StatusNotFound:
 		fmt.Printf("Endpoint %s not found.\n", *c.name)
 

@@ -8,6 +8,7 @@ import (
 	"os"
 
 	cli "github.com/mariusmagureanu/cli_poc/commands"
+	"strings"
 )
 
 type DeleteConsumer struct {
@@ -41,7 +42,7 @@ func (c DeleteConsumer) GetArg2() string {
 func (c DeleteConsumer) Validate() error {
 	var err error
 	if err = c.Flagset.Parse(os.Args[3:]); err == nil {
-		if *c.name == "" {
+		if strings.TrimSpace(*c.name) == "" {
 			return errors.New("Invalid consumer name.")
 		}
 	}
@@ -66,7 +67,7 @@ func (c DeleteConsumer) Output(status int) {
 
 	switch status {
 	case http.StatusNoContent:
-		fmt.Printf("Consumer %s has been deleted.\n", c.name)
+		fmt.Printf("Consumer %s has been deleted.\n", *c.name)
 	case http.StatusNotFound:
 		fmt.Printf("Consumer %s not found.\n", *c.name)
 

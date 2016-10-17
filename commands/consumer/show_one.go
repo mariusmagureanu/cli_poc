@@ -8,6 +8,7 @@ import (
 	"os"
 
 	cli "github.com/mariusmagureanu/cli_poc/commands"
+	"strings"
 )
 
 type ShowOneConsumer struct {
@@ -45,7 +46,7 @@ func (c ShowOneConsumer) GetArg2() string {
 func (c ShowOneConsumer) Validate() error {
 	var err error
 	if err = c.Flagset.Parse(os.Args[3:]); err == nil {
-		if *c.name == "" {
+		if strings.TrimSpace(*c.name) == "" {
 			return errors.New("Invalid consumer name.")
 		}
 	}
