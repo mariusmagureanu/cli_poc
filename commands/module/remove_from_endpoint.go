@@ -20,13 +20,17 @@ type RemoveEndpointModule struct {
 func NewRemoveEndpointModule() RemoveEndpointModule {
 	var sc = RemoveEndpointModule{}
 
-	sc.Flagset = flag.NewFlagSet("modules", flag.ContinueOnError)
+	sc.Flagset = flag.NewFlagSet("modules", flag.ExitOnError)
 	sc.endpointName = sc.Flagset.String("endpoint", "", "Endpoint name. (Required)")
 	sc.moduleName = sc.Flagset.String("name", "", "Module name. (Required)")
 
 	sc.Arg1 = cli.DELETE_COMMAND
 	sc.Arg2 = cli.ONE_MODULE_ARG
 
+	sc.Flagset.Usage = func() {
+		fmt.Println("delete module [name] endpoint [endpoint]")
+		sc.Flagset.PrintDefaults()
+	}
 	return sc
 }
 
