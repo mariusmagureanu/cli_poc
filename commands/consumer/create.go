@@ -26,9 +26,14 @@ func NewCreateConsumer() CreateConsumer {
 	cc.Arg1 = cli.CREATE_COMMAND
 	cc.Arg2 = cli.ONE_CONSUMER_ARG
 
-	cc.Flagset = flag.NewFlagSet("consumer", flag.ContinueOnError)
+	cc.Flagset = flag.NewFlagSet("Create consumer", flag.ExitOnError)
 	cc.name = cc.Flagset.String("name", "", "Consumer name. (Required)")
 	cc.email = cc.Flagset.String("email", "", "Consumer email.")
+
+	cc.Flagset.Usage = func() {
+		fmt.Println("create consumer [options]")
+		cc.Flagset.PrintDefaults()
+	}
 	return cc
 
 }
@@ -62,9 +67,6 @@ func (c CreateConsumer) Run() error {
 	var err = c.Validate()
 
 	if err != nil {
-		fmt.Println(err.Error())
-		fmt.Println("Usage:")
-		c.Flagset.PrintDefaults()
 		return err
 	}
 

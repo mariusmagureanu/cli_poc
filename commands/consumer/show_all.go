@@ -17,9 +17,14 @@ type ShowConsumers struct {
 func NewShowConsumers() ShowConsumers {
 	var sc = ShowConsumers{}
 
-	sc.Flagset = flag.NewFlagSet("consumers", flag.ContinueOnError)
+	sc.Flagset = flag.NewFlagSet("show consumers", flag.ExitOnError)
 	sc.Arg1 = cli.SHOW_COMMAND
 	sc.Arg2 = cli.ALL_CONSUMERS_ARG
+
+	sc.Flagset.Usage = func() {
+		fmt.Println("show consumers")
+		sc.Flagset.PrintDefaults()
+	}
 
 	return sc
 }

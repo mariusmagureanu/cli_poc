@@ -28,15 +28,24 @@ var (
 	addModuleToEndpoint      = module.NewAddEndpointModule()
 	removeModuleFromEndpoint = module.NewRemoveEndpointModule()
 
-	cliCommands = []commands.Runner{createConsumer, showConsumers, deleteConsumer, showOneConsumer,
-		showEndpoints, showOneEndpoint, createEndpoint, deleteEndpoint,
-		showAllEndpointModules, showOneEndpointModule, addModuleToEndpoint, removeModuleFromEndpoint}
+	cliCommands = []commands.Runner{showConsumers, showOneConsumer,
+		deleteConsumer, createConsumer,
+		showEndpoints, showOneEndpoint,
+		deleteEndpoint, createEndpoint,
+		showAllEndpointModules, showOneEndpointModule,
+		removeModuleFromEndpoint, addModuleToEndpoint}
 )
 
 func showUsage() {
-	fmt.Println("show | create | delete | update | add |  sub-command is required.")
+	fmt.Println("show | create | delete | update | add | sub-command is required.")
+	fmt.Println("Usage:")
+	fmt.Println()
 	for _, command := range cliCommands {
-		command.GetFlagSet().PrintDefaults()
+		if command.GetFlagSet().Usage != nil {
+			command.GetFlagSet().Usage()
+			fmt.Println()
+		}
+
 	}
 }
 
@@ -45,7 +54,7 @@ func main() {
 	commands.SetHost("http://127.0.0.1")
 	commands.SetPort("8089")
 
-	if len(os.Args) < 2 {
+	if len(os.Args) < 3 {
 		showUsage()
 		os.Exit(1)
 	}

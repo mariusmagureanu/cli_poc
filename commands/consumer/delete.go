@@ -19,11 +19,17 @@ type DeleteConsumer struct {
 func NewDeleteConsumer() DeleteConsumer {
 	var dc = DeleteConsumer{}
 
-	dc.Flagset = flag.NewFlagSet("consumers", flag.ContinueOnError)
+	dc.Flagset = flag.NewFlagSet("delete consumer", flag.ExitOnError)
 	dc.name = dc.Flagset.String("name", "", "Consumer name. (Required)")
 
 	dc.Arg1 = cli.DELETE_COMMAND
 	dc.Arg2 = cli.ONE_CONSUMER_ARG
+
+	dc.Flagset.Usage = func() {
+		fmt.Println("delete consumer [options]")
+		dc.Flagset.PrintDefaults()
+	}
+
 	return dc
 }
 

@@ -23,11 +23,17 @@ func NewShowOneConsumer() ShowOneConsumer {
 
 	dc.consumer = cli.SimpleConsumer{}
 
-	dc.Flagset = flag.NewFlagSet("consumer", flag.ContinueOnError)
+	dc.Flagset = flag.NewFlagSet("show one consumer", flag.ExitOnError)
 	dc.name = dc.Flagset.String("name", "", "Consumer name. (Required)")
 
 	dc.Arg1 = cli.SHOW_COMMAND
 	dc.Arg2 = cli.ONE_CONSUMER_ARG
+
+	dc.Flagset.Usage = func() {
+		fmt.Println("show consumer [options]")
+		dc.Flagset.PrintDefaults()
+	}
+
 	return dc
 }
 
