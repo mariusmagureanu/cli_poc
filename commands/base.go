@@ -14,12 +14,17 @@ const (
 	CREATE_COMMAND = "create"
 	SHOW_COMMAND   = "show"
 	DELETE_COMMAND = "delete"
+	UPDATE_COMMAND = "update"
+	ADD_COMMAND    = "add"
 
 	ONE_CONSUMER_ARG  = "consumer"
 	ALL_CONSUMERS_ARG = "consumers"
 
 	ONE_ENDPOINT_ARG  = "endpoint"
 	ALL_ENDPOINTS_ARG = "endpoints"
+
+	ONE_MODULE_ARG = "module"
+	ALL_MODULE_ARG = "modules"
 
 	padding = 3
 )

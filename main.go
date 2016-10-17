@@ -5,6 +5,7 @@ import (
 	"github.com/mariusmagureanu/cli_poc/commands"
 	"github.com/mariusmagureanu/cli_poc/commands/consumer"
 	"github.com/mariusmagureanu/cli_poc/commands/endpoint"
+	"github.com/mariusmagureanu/cli_poc/commands/module"
 	"os"
 	"strings"
 )
@@ -20,13 +21,20 @@ var (
 	showEndpoints   = endpoint.NewShowEndpoints()
 	showOneEndpoint = endpoint.NewShowOneEndpoint()
 	createEndpoint  = endpoint.NewCreateEndpoint()
+	deleteEndpoint  = endpoint.NewDeleteEndpoint()
+
+	showAllEndpointModules   = module.NewShowEndpointModuless()
+	showOneEndpointModule    = module.NewShowEndpointModule()
+	addModuleToEndpoint      = module.NewAddEndpointModule()
+	removeModuleFromEndpoint = module.NewRemoveEndpointModule()
 
 	cliCommands = []commands.Runner{createConsumer, showConsumers, deleteConsumer, showOneConsumer,
-		showEndpoints, showOneEndpoint, createEndpoint}
+		showEndpoints, showOneEndpoint, createEndpoint, deleteEndpoint,
+		showAllEndpointModules, showOneEndpointModule, addModuleToEndpoint, removeModuleFromEndpoint}
 )
 
 func showUsage() {
-	fmt.Println("show | create | delete | update | subcommand is required.")
+	fmt.Println("show | create | delete | update | add |  sub-command is required.")
 	for _, command := range cliCommands {
 		command.GetFlagSet().PrintDefaults()
 	}
